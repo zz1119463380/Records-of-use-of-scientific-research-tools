@@ -1,1 +1,28 @@
-test
+1.制作三线表需要用到"\toprule","\midrule","\midrule",需要导入的包是"\usepackage{booktabs}";
+eg.
+\begin{table}[htbp]
+  \centering
+  \caption{Summary statistics for different number of sub-specifications on a $20\times20$ grid environment and $5$ robots}
+  \resizebox{\linewidth}{!}{
+    \begin{tabular}{ccccc}
+    \toprule
+    \multirow{2}[0]{*}{$\mathcal{S}$} & \multicolumn{2}{c}{IRL} & \multicolumn{2}{c}{SAA} \\
+    \cline{2-5}
+         & cpu time/s & solution & cpu time/s & solution \\
+    \midrule
+    5    & \textbf{10.78} & \textbf{31.4} & 51.11 & 31.5 \\
+    10   & \textbf{11.79} & \textbf{38.8} & 129.61 & 46 \\
+    15   & \textbf{15.39} & \textbf{44.1} & 247.68 & 68.5 \\
+    20   & \textbf{21.54} & \textbf{61.7} & 375.89 & 91.6 \\
+    25   & \textbf{25.71} & \textbf{57.8} & 561.79 & 107 \\
+    30   & \textbf{32.44} & \textbf{63.4} & 740.81 & 122.9 \\
+    35   & \textbf{46.41} & \textbf{72} & 993.63 & 142.6 \\
+    40   & \textbf{54.65} & \textbf{82.9} & 1274.71 & 165 \\
+    45   & \textbf{59.18} & \textbf{87.4} & 1585.51 & 187.2 \\
+    50   & \textbf{64.34} & \textbf{92.9} & 1971.39 & 196.4 \\
+    \midrule
+    \end{tabular}%
+    }
+  \label{T1}%
+\end{table}%
+其中\resizebox{\linewidth}{!}{内容} 要在\begin{tabular},\end{tabular}的前后,用来使表格自适应宽度,使其与页面一样宽.需要导入的包是"\usepackage{graphicx}";
