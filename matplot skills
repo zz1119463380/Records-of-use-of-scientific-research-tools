@@ -1,0 +1,47 @@
+# 绘制坐标轴为箭头的图
+
+
+import matplotlib.pyplot as plt
+import mpl_toolkits.axisartist as axisartist
+import numpy as np
+
+# 创建画布
+fig = plt.figure(figsize=(10, 6))
+# 使用axisartist.Subplot方法创建一个绘图区对象ax
+ax = axisartist.Subplot(fig, 111)
+# 将绘图区对象添加到画布中
+fig.add_axes(ax)
+
+# 通过set_axisline_style方法设置绘图区的底部及左侧坐标轴样式
+# "-|>"代表实心箭头："->"代表空心箭头
+ax.axis["bottom"].set_axisline_style("-|>", size=1.5)
+ax.axis["left"].set_axisline_style("-|>", size=1.5)
+# 通过set_visible方法设置绘图区的顶部及右侧坐标轴隐藏
+ax.axis["top"].set_visible(False)
+ax.axis["right"].set_visible(False)
+
+# 数据
+x = np.linspace(1, 10, 500)  # Size of the system, 500 points for smoothness
+y = 2**x  # Number of states
+
+# 绘制图形
+ax.plot(x, y, color='blue', linewidth=2)
+
+# 设置标题
+#plt.title("Exponential Growth: $2^n$")
+
+# 隐藏坐标轴上的数字
+ax.set_xticks([])
+ax.set_yticks([])
+
+# 设置轴标签
+ax.set_xlabel("Size of the system", position=(1, 0.5))
+ax.set_ylabel("Number of states", position=(0.5, 1))
+
+# 设置坐标轴范围
+ax.set_xlim(1, 10)
+ax.set_ylim(2, 2**10)
+
+# 显示图形
+plt.tight_layout()
+plt.show()
