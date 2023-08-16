@@ -45,3 +45,56 @@ ax.set_ylim(2, 2**10)
 # 显示图形
 plt.tight_layout()
 plt.show()
+
+
+
+
+
+
+# 绘制路径规划地图
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+
+# 定义坐标
+not_position = [(0.5,5.5), (5.5,6.5),(1.5,1.5),(1.5,3.5),(8.5,0.5),(8.5,3.5),(5.5,1.5),(7.5,7.5),(9.5,6.5),(2.5,5.5)]
+job_position = [[([0.5], [6.5])], [([3.5, 0.5], [9.5, 8.5])], [([0.5], [2.5])], [([4.5, 3.5], [1.5, 2.5])], [([6.5, 8.5, 4.5], [9.5, 1.5, 8.5])]]
+final_position = [[([2.5], [6.5])], [([7.5, 8.5], [3.5, 2.5])]]
+paths = [[([6.5, 6.5, 5.5, 4.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5], [8.5, 9.5, 9.5, 9.5, 9.5, 9.5, 9.5, 9.5, 9.5, 9.5, 9.5])], [([6.5, 5.5, 5.5, 4.5, 3.5, 2.5, 1.5, 0.5, 0.5, 0.5, 0.5], [3.5, 3.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5])], [([6.5, 6.5, 6.5, 6.5, 6.5, 6.5, 6.5, 6.5, 6.5, 6.5, 7.5, 7.5], [4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 3.5])], [([8.5, 8.5, 8.5, 8.5, 8.5, 8.5, 8.5, 8.5, 8.5, 8.5, 8.5], [9.5, 9.5, 9.5, 9.5, 9.5, 9.5, 9.5, 9.5, 9.5, 9.5, 9.5])], [([5.5, 5.5, 5.5, 5.5, 4.5, 4.5, 3.5, 2.5, 1.5, 0.5, 1.5, 2.5], [5.5, 5.5, 5.5, 5.5, 5.5, 6.5, 6.5, 6.5, 6.5, 6.5, 6.5, 6.5])]]
+
+
+# 创建一个10x10的栅格地图
+fig, ax = plt.subplots(figsize=(10, 10))
+for i in range(11):
+    ax.axhline(i, color='gray', linestyle='dashed')
+    ax.axvline(i, color='gray', linestyle='dashed')
+
+# 为最外侧添加黑色框线
+for i in [0, 10]:
+    ax.axhline(i, color='black')
+    ax.axvline(i, color='black')
+
+# 根据坐标上色
+for x, y in not_position:
+    rect = patches.Rectangle((x-0.49, y-0.495), 0.985, 0.985, linewidth=0, edgecolor=(116/255, 127/255, 127/255), facecolor=(116/255, 127/255, 127/255))
+    ax.add_patch(rect)
+
+#(116/255, 127/255, 127/255),(27/255, 127/255, 121/255),(0, 204/255, 192/255),(114/255, 242/255, 235/255),(255/255, 72/255, 88/255),(140/255, 31/255, 40/255),(227/255, 199/255, 95/255),(3/255, 120/255, 166/255),(90/255, 115/255, 191/255)
+
+colors = [(27/255, 127/255, 121/255), (0, 204/255, 192/255), (114/255, 242/255, 235/255), (255/255, 72/255, 88/255), (140/255, 31/255, 40/255), (227/255, 199/255, 95/255), (3/255, 120/255, 166/255)]
+for idx, pos in enumerate(job_position + final_position):
+    for x_list, y_list in pos:
+        for x, y in zip(x_list, y_list):
+            rect = patches.Rectangle((x-0.49, y-0.495), 0.985, 0.985, linewidth=0, edgecolor=colors[idx % len(colors)], facecolor=colors[idx % len(colors)])
+            ax.add_patch(rect)
+
+# # 绘制路径
+# path_colors = [(1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 0), (1, 0, 1)]
+# for idx, path in enumerate(paths):
+#     for x_list, y_list in path:
+#         ax.plot(x_list, y_list, color=path_colors[idx], linestyle='dashed', marker='o')
+
+# 显示图形
+ax.set_xlim(0, 10)
+ax.set_ylim(0, 10)
+ax.set_aspect('equal')
+plt.show()
